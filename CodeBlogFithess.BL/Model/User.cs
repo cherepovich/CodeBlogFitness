@@ -5,7 +5,8 @@ namespace CodeBlogFithess.BL.Model
     /// <summary>
     /// Пользователь
     /// </summary>
-    class User
+    [Serializable]
+    public class User
     {
         #region Свойства класса
         public string Name { get; } // Публичное свойство - "правильно обернутые глобальные переменные"

@@ -5,6 +5,7 @@ namespace CodeBlogFithess.BL.Model
     /// <summary>
     /// Пол
     /// </summary>
+    [Serializable]
     public class Gender
     {
         /// <summary>

@@ -10,10 +10,11 @@ namespace CodeBlogFithess.BL.Model
     {
         #region Свойства класса
         public string Name { get; } // Публичное свойство - "правильно обернутые глобальные переменные"
-        public Gender Gender { get; } // Пол человека. Не даем возможности изменять
-        public DateTime BirthDate { get; }
+        public Gender Gender { get; set; } // Пол человека. Не даем возможности изменять
+        public DateTime BirthDate { get; set; }
         public Double Weight { get; set; }
         public Double Height { get; set; }
+        public int Age { get { return DateTime.Now.Year - BirthDate.Year; } } // Упрощенное вычисление года (в некот. случ. м.б. неккоректно)
         #endregion
 
         /// <summary>
@@ -59,11 +60,24 @@ namespace CodeBlogFithess.BL.Model
             Weight = weight;
             Height = height;
         }
-        public override string ToString()
+
+        /* Версия конструктора для создания пользователя только по имени, для использования в CurrentUser (процесс входа в систему).
+         * Начали делать "Используем обращение к базовому конструктору" но пока не стали */
+        public User(string name)
         {
-            return Name;
+            #region Проверка условий
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException("Имя пользователя не может быть пустым", nameof(name));
+            }
+            #endregion
+
+            Name = name;
         }
 
-
+        public override string ToString()
+        {
+            return Name + " " + Age;
+        }
     }
 }

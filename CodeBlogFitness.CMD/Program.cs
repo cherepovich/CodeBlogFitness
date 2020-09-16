@@ -7,24 +7,70 @@ namespace CodeBlogFitness.CMD
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Привет от приложения CodeBlogFitness");
-            Console.WriteLine("Введите имя пользователя");
+            Console.WriteLine("Привет от приложения CodeBlogFitness!");
+            Console.Write("Введите имя пользователя:");
             var name = Console.ReadLine();
 
-            Console.WriteLine("Введите пол");
-            var gender = Console.ReadLine();
+            var userController = new UserController(name);
 
-            Console.WriteLine("Введите дату рождения");
-            var birthdate = DateTime.Parse(Console.ReadLine()); // Переписать
+            // Если пользователь новый, то устанавливаем остальные свойства кроме Name
+            if (userController.IsNewUser)
+            {
+                Console.Write("Введите пол:");
+                var gender = Console.ReadLine();
+                var birthDate = ParseDateTime();
+                var weight = ParseDouble("вес");
+                var height = ParseDouble("рост");
 
-            Console.WriteLine("Введите вес");
-            var weight = double.Parse(Console.ReadLine());
+                // Непосредственно тут устанавливаем остальные свойства.
+                userController.SetNewUserData(gender, birthDate, weight, height);
+            }
 
-            Console.WriteLine("Введите рост");
-            var hight = double.Parse(Console.ReadLine());
+            Console.WriteLine(userController.CurrentUser);
+            Console.ReadLine();
+        }
 
-            var userController = new UserController(name, gender, birthdate, weight, hight);
-            userController.Save();
+        /// <summary>
+        /// Получение данных о дне рождения пользователя в цикле, с учетом проверки на правильность.
+        /// </summary>
+        /// <returns>Дата рождения в правильном формате.</returns>
+        private static DateTime ParseDateTime()
+        {
+            DateTime birthDate;
+            while (true)
+            {
+                Console.Write("Введите дату рождения в формате dd.MM.yyyy: ");
+                if (DateTime.TryParse(Console.ReadLine(), out birthDate))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Неверный формат даты рождения");
+                }
+            }
+            return birthDate;
+        }
+
+        /// <summary>
+        /// Считывание параметра double с учетом проверки правильности ввода и перезапроса
+        /// </summary>
+        /// <param name="name">Название параметра, который считываем.</param>
+        /// <returns>Проверенное значение в double - формате.</returns>
+        private static double ParseDouble(string name)
+        {
+            while (true)
+            {
+                Console.Write($"Введите {name}: ");
+                if (double.TryParse(Console.ReadLine(), out double value))
+                {
+                    return value;
+                }
+                else
+                {
+                    Console.WriteLine($"Неверный формат {name}");
+                }
+            }
         }
     }
 }

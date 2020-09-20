@@ -3,28 +3,30 @@
 namespace CodeBlogFithess.BL.Model
 {
     /// <summary>
-    /// Пользователь
+    /// Пользователь.
     /// </summary>
     [Serializable]
     public class User
     {
         #region Свойства класса
         public string Name { get; } // Публичное свойство - "правильно обернутые глобальные переменные"
-        public Gender Gender { get; set; } // Пол человека. Не даем возможности изменять
+        public Gender Gender { get; set; } // Пол человека.
         public DateTime BirthDate { get; set; }
         public Double Weight { get; set; }
         public Double Height { get; set; }
-        public int Age { get { return DateTime.Now.Year - BirthDate.Year; } } // Упрощенное вычисление года (в некот. случ. м.б. неккоректно)
+
+        // Упрощенное вычисление возраста (в некот. случ. м.б. неккоректно).
+        public int Age { get { return DateTime.Now.Year - BirthDate.Year; } }
         #endregion
 
         /// <summary>
-        /// Создание пользователя
+        /// Конструирование пользователя.
         /// </summary>
-        /// <param name="name">параметр - имя пользователя</param>
-        /// <param name="gender"></param>
-        /// <param name="birthDate"></param>
-        /// <param name="weight"></param>
-        /// <param name="height"></param>
+        /// <param name="name">Имя пользователя</param>
+        /// <param name="gender">Пол</param>
+        /// <param name="birthDate">Дата рождения</param>
+        /// <param name="weight">Вес</param>
+        /// <param name="height">Рост</param>
         public User(string name, Gender gender, DateTime birthDate, Double weight, Double height)
         {
             #region Проверка условий

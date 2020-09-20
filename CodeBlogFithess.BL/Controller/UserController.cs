@@ -14,12 +14,16 @@ namespace CodeBlogFithess.BL.Controller
     /// </summary>
     public class UserController
     {
-        public List<User> Users { get; } // Использование List не безопасно т.к. можно получить доступ к элементам даже, если типа private
-        public User CurrentUser { get; } // Активный пользователь
+        public List<User> Users { get; } // Использование List не безопасно т.к. можно получить доступ к элементам даже, если типа private.
+        public User CurrentUser { get; } // Активный пользователь (которого ищем или создаем).
 
         /* true - если будет создан новый пользователь
          * false - пользователь считан из файла */
         public bool IsNewUser { get; } = false; // конструкция для указания значения по умолчанию = false
+        /// <summary>
+        /// Конструирование контроллера.
+        /// </summary>
+        /// <param name="userName">Параметр - имя пользователя, которое вводят на форму.</param>
         public UserController(string userName)
         {
             #region Проверки
@@ -47,7 +51,7 @@ namespace CodeBlogFithess.BL.Controller
         }
 
         /// <summary>
-        /// Загрузка (десириализация) пользователей из файла либо создание новых пользователей.
+        /// Загрузка (десеарилизация) пользователей из файла либо создание списка новых пользователей.
         /// </summary>
         /// <returns> Пользователь приложения. </returns>
         private List<User> GetUsersData()
@@ -57,7 +61,7 @@ namespace CodeBlogFithess.BL.Controller
             {
                 /* Если в файле считается тип являющийся списком пользователей, то вернем его.
                 Если же нет, то создаем новый пустой список пользователей и возвращаем его.*/
-                if (formatter.Deserialize(fs) is List<User> users)
+                if (fs.Length > 0 && formatter.Deserialize(fs) is List<User> users)
                 {
                     return users;
                 }
@@ -81,7 +85,7 @@ namespace CodeBlogFithess.BL.Controller
         }
 
         /// <summary>
-        /// Сохранение (сериализация) списка пользователей.
+        /// Сохранение (сериализация) текущего списка пользователей.
         /// </summary>
         public void Save()
         {

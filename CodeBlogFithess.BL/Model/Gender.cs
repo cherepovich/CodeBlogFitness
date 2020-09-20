@@ -9,14 +9,14 @@ namespace CodeBlogFithess.BL.Model
     public class Gender
     {
         /// <summary>
-        /// Название
+        /// Название пола.
         /// </summary>
         public string Name { get; }
 
         /// <summary>
-        /// Создать пол (конструктор для пола)
+        /// Конструирование пола.
         /// </summary>
-        /// <param name="name">Имя пола</param>
+        /// <param name="name">Параметр - название пола.</param>
         public Gender(string name)
         {
             if (string.IsNullOrWhiteSpace(name))

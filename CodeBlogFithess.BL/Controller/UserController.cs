@@ -12,14 +12,16 @@ namespace CodeBlogFithess.BL.Controller
     /// Реализация контроллера пользователя.
     /// Действия: сохранение, считывание и т.д.
     /// </summary>
-    public class UserController
+    public class UserController : ControllerBase // Наследование чтобы сократить код и избавиться от дублирования кода
     {
+        private const string USERS_FILE_NAME = "users.dat";
         public List<User> Users { get; } // Использование List не безопасно т.к. можно получить доступ к элементам даже, если типа private.
         public User CurrentUser { get; } // Активный пользователь (которого ищем или создаем).
 
-        /* true - если будет создан новый пользователь
+        /* Флаг: true - если будет создан новый пользователь
          * false - пользователь считан из файла */
         public bool IsNewUser { get; } = false; // конструкция для указания значения по умолчанию = false
+
         /// <summary>
         /// Конструирование контроллера.
         /// </summary>
@@ -56,20 +58,8 @@ namespace CodeBlogFithess.BL.Controller
         /// <returns> Пользователь приложения. </returns>
         private List<User> GetUsersData()
         {
-            var formatter = new BinaryFormatter();
-            using (var fs = new FileStream("users.dat", FileMode.OpenOrCreate))
-            {
-                /* Если в файле считается тип являющийся списком пользователей, то вернем его.
-                Если же нет, то создаем новый пустой список пользователей и возвращаем его.*/
-                if (fs.Length > 0 && formatter.Deserialize(fs) is List<User> users)
-                {
-                    return users;
-                }
-                else
-                {
-                    return new List<User>();
-                }
-            }
+            // Возвращает значение своего операнда слева, если его значение не равно null
+            return Load<List<User>>(USERS_FILE_NAME) ?? new List<User>();
         }
 
         public void SetNewUserData(string genderName, DateTime birthDate, double weight = 1, double height = 1)
@@ -89,11 +79,7 @@ namespace CodeBlogFithess.BL.Controller
         /// </summary>
         public void Save()
         {
-            var formatter = new BinaryFormatter();
-            using (var fs = new FileStream("users.dat", FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fs, Users);
-            }
+            Save(USERS_FILE_NAME, Users);
         }
     }
 }

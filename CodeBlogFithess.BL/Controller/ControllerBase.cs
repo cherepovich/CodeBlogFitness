@@ -17,7 +17,7 @@ namespace CodeBlogFithess.BL.Controller
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="item"></param>
-        // ! protected значит метод доступен в текущем классе и в производных классах.
+        // * protected значит метод доступен в текущем классе и в производных классах.
         protected void Save(string fileName, object item)
         {
             var formatter = new BinaryFormatter();

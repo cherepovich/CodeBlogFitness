@@ -8,13 +8,17 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace CodeBlogFithess.BL.Controller
 {
     /// <summary>
-    /// Добавление еды в справочник продуктов, извлечение еды из справочника продуктов.
+    /// Контроллер еды.
+    /// Реализация действий:
+    /// 1. добавление еды в справочник продуктов
+    /// 2. добавление еды в базу съеденного
+    /// 3. извлечение еды из справочника продуктов
     /// </summary>
     public class EatingController : ControllerBase
     {
         private const string FOODS_FILE_NAME = "foods.dat";
         private const string EATINGS_FILE_NAME = "eatings.dat";
-        private readonly User user; //readonly - поле может только считываться, устанавливается только при объявлении или в конструкторе
+        private readonly User user; // * readonly - поле может только считываться, устанавливается только при объявлении или в конструкторе.
 
         /// <summary>
         /// Справочник продуктов.
@@ -37,17 +41,17 @@ namespace CodeBlogFithess.BL.Controller
         }
 
         /// <summary>
-        /// Добавление в базу продукта, добавление в справочник поеданий. 
+        /// Добавление продукта в справочник продуктов, добавление в базу съеденного. 
         /// </summary>
-        /// <param name="food"></param>
-        /// <param name="weight"></param>
+        /// <param name="food">Параметр - продукт.</param>
+        /// <param name="weight">Параметр - вес продукта.</param>
         public void Add(Food food, double weight)
         {
             var product = Foods.SingleOrDefault(f => f.Name == food.Name);
             if (product == null) // Новый продукт.
             {
-                Foods.Add(food); // Пополняем базу продуктов.
-                Eating.Add(food, weight); // Пополняем базу приемов пищи.
+                Foods.Add(food); // Пополняем справочник продуктов.
+                Eating.Add(food, weight); // Пополняем базу съеденного.
                 Save();
             }
             else // Такой продукт уже когда-то ели.
@@ -77,7 +81,7 @@ namespace CodeBlogFithess.BL.Controller
         }
 
         /// <summary>
-        /// Сохранение справочника продуктов и справочника приемов пищи.
+        /// Сохранение справочника продуктов и базы съеденного.
         /// </summary>
         private void Save()
         {

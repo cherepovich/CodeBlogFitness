@@ -15,7 +15,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CodeBlogFithess.BL.Controller.UserController">
-    <Position X="7" Y="1.75" Width="1.5" />
+    <Position X="3" Y="1.75" Width="1.5" />
     <Members>
       <Property Name="CurrentUser" Hidden="true" />
     </Members>
@@ -28,32 +28,59 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="CodeBlogFithess.BL.Model.Eating">
-    <Position X="3" Y="1.75" Width="1.5" />
+    <Position X="14.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgIBEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Eating.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CodeBlogFithess.BL.Model.Food">
-    <Position X="4.75" Y="1.75" Width="1.5" />
+    <Position X="12.5" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAAAAAAAAEAAAAABQAAAAAABAAAAAAAAAEAAA=</HashCode>
       <FileName>Model\Food.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CodeBlogFithess.BL.Model.Gender" Collapsed="true">
-    <Position X="9" Y="0.75" Width="1.5" />
+    <Position X="12.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Gender.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CodeBlogFithess.BL.Model.User" Collapsed="true">
-    <Position X="9" Y="1.5" Width="1.5" />
+    <Position X="12.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAAACEAEAAAAQAACAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\User.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="CodeBlogFithess.BL.Model.Exercise">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAg=</HashCode>
+      <FileName>Model\Exercise.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Activity" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CodeBlogFithess.BL.Model.Activity">
+    <Position X="10.25" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Activity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CodeBlogFithess.BL.Controller.ExerciseController">
+    <Position X="5" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAAAAABAAAAAFAABAAAAAAAACAAAAAAIAAAQA=</HashCode>
+      <FileName>Controller\ExerciseController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Exercises" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
